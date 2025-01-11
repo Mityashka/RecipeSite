@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/add_recipe.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="add-recipe-wrapper">
+        <h2>Добавить рецепт</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label for="id_title">Название рецепта</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <small class="error">{{ form.title.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+                <label for="id_description">Описание рецепта</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <small class="error">{{ form.description.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+                <label for="id_steps">Шаги приготовления</label>
+                {{ form.steps }}
+                {% if form.steps.errors %}
+                    <small class="error">{{ form.steps.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+                <label for="id_cooking_time">Время приготовления (минуты)</label>
+                {{ form.cooking_time }}
+                {% if form.cooking_time.errors %}
+                    <small class="error">{{ form.cooking_time.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+                <label for="id_ingredients">Ингредиенты</label>
+                {{ form.ingredients }}
+                {% if form.ingredients.errors %}
+                    <small class="error">{{ form.ingredients.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+                <label for="id_image">Изображение</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                    <small class="error">{{ form.image.errors|join:", " }}</small>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn-primary">Добавить рецепт</button>
+        </form>
+    </div>
+{% endblock %}

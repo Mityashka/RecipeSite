@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/recipe_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="recipe-detail-container">
+        <div class="recipe-header">
+            <h1>{{ recipe.title }}</h1>
+            <p class="recipe-author">Автор: {{ recipe.author.username }}</p>
+        </div>
+
+        {% if recipe.image %}
+        <div class="recipe-image">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        </div>
+        {% endif %}
+
+        <div class="recipe-description">
+            <h2>Описание</h2>
+            <p>{{ recipe.description }}</p>
+        </div>
+
+        <div class="recipe-ingredients">
+            <h2>Ингредиенты</h2>
+            <p>{{ recipe.ingredients }}</p>
+        </div>
+
+        <div class="recipe-steps">
+            <h2>Шаги приготовления</h2>
+            <p>{{ recipe.steps }}</p>
+        </div>
+
+        <div class="recipe-cooking-time">
+            <h2>Время приготовления</h2>
+            <p>{{ recipe.cooking_time }} минут</p>
+        </div>
+    </div>
+{% endblock %}

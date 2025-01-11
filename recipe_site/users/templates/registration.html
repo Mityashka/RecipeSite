@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="registration-wrapper">
+    <div class="registration-container">
+        <h2>Регистрация</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label for="username">Имя пользователя</label>
+                {{ form.username }}
+                <small>Только буквы, цифры и символы @/./+/-/_</small>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                {{ form.password1 }}
+                <small>Не менее 8 символов. Пароль не должен быть слишком похож на вашу личную информацию или быть
+                    полностью цифровым.</small>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Подтверждение пароля</label>
+                {{ form.password2 }}
+                <small>Введите тот же пароль для подтверждения.</small>
+            </div>
+
+            <button type="submit" class="btn-submit">Зарегистрироваться</button>
+        </form>
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

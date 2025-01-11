@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+{% block additional_styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="recipe-list">
+        <h2>Популярные рецепты</h2>
+        <div class="recipes">
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}">
+                    <h3>{{ recipe.name }}</h3>
+                    <p>{{ recipe.description|truncatewords:20 }}</p>
+                    <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="view-recipe-btn">Посмотреть рецепт</a>
+                </div>
+            {% empty %}
+                <p>На данный момент рецептов нет.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

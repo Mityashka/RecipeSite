@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./recipe_site/db.sqlite3:/recipe_site/db.sqlite3
+      - ./recipe_site:/recipe_site
+      - ./recipe_site/media:/recipe_site/media
+      - ./staticfiles:/recipe_site/staticfiles
+    environment:
+      - DEBUG=False
+      - DJANGO_ALLOWED_HOSTS=158.160.39.142
+    command: gunicorn --bind 0.0.0.0:8000 recipe_site.wsgi:application
